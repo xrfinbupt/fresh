@@ -1,8 +1,9 @@
 package runner
 
 import (
-	assert "github.com/pilu/miniassert"
 	"testing"
+
+	assert "github.com/pilu/miniassert"
 )
 
 func TestIsWatchedFile(t *testing.T) {
