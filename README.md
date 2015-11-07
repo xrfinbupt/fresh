@@ -1,14 +1,27 @@
+# Status of this fork
+
+Development by the original Fresh creator seems to have slowed down a lot with important pull requests waiting for many months to be reviewed and merged.
+
+I will be cherry-picking commits from all the forks just to have a better, more up to date version. Unless I stumble upon something affecting me personally I don't intend to put significant amount of time into improving this already great tool.
+
+I promise to be very responsive reviewing and accepting (or rejecting) pull requests.
+
 # Fresh
 
-Fresh is a command line tool that builds and (re)starts your web application everytime you save a Go or template file.
+Fresh is a command line tool that builds and (re)starts your web application every time you save a Go or template file.
 
 If the web framework you are using supports the Fresh runner, it will show build errors on your browser.
 
-It currently works with [Traffic](https://github.com/pilu/traffic), [Martini](https://github.com/codegangsta/martini) and [gocraft/web](https://github.com/gocraft/web).
+It has been tested with:
+* [chi](https://github.com/pressly/chi)
+* [goji](https://github.com/zenazn/goji)
+* [gocraft/web](https://github.com/gocraft/web)
+* [Martini](https://github.com/codegangsta/martini)
+* [Traffic](https://github.com/pilu/traffic)
 
 ## Installation
 
-    go get github.com/pilu/fresh
+    go get github.com/c2h5oh/fresh
 
 ## Usage
 
@@ -43,9 +56,14 @@ Here is a sample config file with the default settings:
     log_color_watcher: magenta
     log_color_app:
 
-## Author
+## Original Author
 
 * [Andrea Franz](http://gravityblast.com)
+
+## Maintainter of this fork
+
+* [Maciej Lisiewski](https://twitter.com/lisiewski)
+
 
 ## More
 
@@ -58,4 +76,3 @@ Here is a sample config file with the default settings:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
