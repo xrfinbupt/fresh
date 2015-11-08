@@ -2,5 +2,4 @@
 
 package runner
 
-func initLimit() {
-}
+func initLimit() {}
