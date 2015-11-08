@@ -2,7 +2,7 @@
 
 Development by the original Fresh creator seems to have slowed down a lot with important pull requests waiting for many months to be reviewed and merged.
 
-I will be cherry-picking commits from all the forks just to have a better, more up to date version. Unless I stumble upon something affecting me personally I don't intend to put significant amount of time into improving this already great tool.
+I will be cherry-picking commits from all the forks just to have a better, more up to date version. ~~Unless I stumble upon something affecting me personally I don't intend to put significant amount of time into improving this already great tool.~~ On day one I rewrote config handling, added multiple directory watching and excluding directories from being watched
 
 I promise to be very responsive reviewing and accepting (or rejecting) pull requests.
 
@@ -39,24 +39,25 @@ If `go build` returns an error, it will log it in the tmp folder.
 [Traffic](https://github.com/pilu/traffic) already has a middleware that shows the content of that file if it is present. This middleware is automatically added if you run a Traffic web app in dev mode with Fresh.
 Check the `_examples` folder if you want to use it with Martini or Gocraft Web.
 
-`fresh` uses `./runner.conf` for configuration by default, but you may specify an alternative config filepath using `-c`:
+`fresh` uses [toml](https://github.com/BurntSushi/toml) configuration files.
+`./runner.conf` is loaded by default (if it exists), but you may specify an alternative config filepath using `-c`:
 
     fresh -c other_runner.conf
 
 Here is a sample config file with the default settings:
 
-    root:              .
-    tmp_path:          ./tmp
-    build_name:        runner-build
-    build_log:         runner-build-errors.log
-    valid_ext:         .go, .tpl, .tmpl, .html
-    build_delay:       600
-    colors:            1
-    log_color_main:    cyan
-    log_color_build:   yellow
-    log_color_runner:  green
-    log_color_watcher: magenta
-    log_color_app:
+    root              = "."
+    tmp_path          = "./tmp"
+    build_name        = "runner-build"
+    build_log         = "runner-build-errors.log"
+    valid_ext         = [".go", ".tpl", ".tmpl", ".html"]
+    build_delay       = 600
+    colors            = 1
+    log_color_main    = "cyan"
+    log_color_build   = "yellow"
+    log_color_runner  = "green"
+    log_color_watcher = "magenta"
+    log_color_app     = ""
 
 ## Original Author
 

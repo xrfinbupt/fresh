@@ -14,7 +14,7 @@ var logger = logPkg.New(colorable.NewColorableStderr(), "", 0)
 
 func newLogFunc(prefix string) func(string, ...interface{}) {
 	color, clear := "", ""
-	if settings["colors"] == "1" {
+	if settings.Colors {
 		color = fmt.Sprintf("\033[%sm", logColor(prefix))
 		clear = fmt.Sprintf("\033[%sm", colors["reset"])
 	}

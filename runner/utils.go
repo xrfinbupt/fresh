@@ -8,50 +8,45 @@ import (
 
 func initFolders() {
 	runnerLog("InitFolders")
-	path := tmpPath()
-	runnerLog("mkdir %s", path)
-	err := os.Mkdir(path, 0755)
+	runnerLog("mkdir %s", settings.TmpPath)
+	err := os.Mkdir(settings.TmpPath, 0755)
 	if err != nil {
 		runnerLog(err.Error())
 	}
 }
 
-func isExcludedDir(path string) bool {
+func isExcluded(path string) bool {
 	absPath, _ := filepath.Abs(path)
-	if _, ok := excludedDirs[absPath]; ok {
-		return true
+	for _, excl := range settings.ExcludePaths {
+		absExclPath, _ := filepath.Abs(excl)
+		if strings.HasPrefix(absPath, absExclPath+"/") {
+			return true
+		}
 	}
 	return false
 }
 
-func isTmpDir(path string) bool {
-	absolutePath, _ := filepath.Abs(path)
-	absoluteTmpPath, _ := filepath.Abs(tmpPath())
-
-	return absolutePath == absoluteTmpPath
-}
-
-func isWatchedFile(path string) bool {
-	absolutePath, _ := filepath.Abs(path)
-	absoluteTmpPath, _ := filepath.Abs(tmpPath())
-
-	if strings.HasPrefix(absolutePath, absoluteTmpPath) {
-		return false
-	}
-
+func isValidExt(path string) bool {
 	ext := filepath.Ext(path)
 
-	for _, e := range strings.Split(settings["valid_ext"], ",") {
+	for _, e := range settings.ValidExtensions {
 		if strings.TrimSpace(e) == ext {
 			return true
 		}
 	}
-
 	return false
 }
 
+func isWatchedFile(path string) bool {
+	if isExcluded(path) {
+		return false
+	}
+
+	return isValidExt(path)
+}
+
 func createBuildErrorsLog(message string) bool {
-	file, err := os.Create(buildErrorsFilePath())
+	file, err := os.Create(settings.BuildErrorPath)
 	if err != nil {
 		return false
 	}
@@ -65,7 +60,7 @@ func createBuildErrorsLog(message string) bool {
 }
 
 func removeBuildErrorsLog() error {
-	err := os.Remove(buildErrorsFilePath())
+	err := os.Remove(settings.BuildErrorPath)
 
 	return err
 }

@@ -1,7 +1,6 @@
 package runner
 
 import (
-	"fmt"
 	"os"
 	"runtime"
 	"strings"
@@ -31,7 +30,7 @@ func flushEvents() {
 
 func start() {
 	loopIndex := 0
-	buildDelay := buildDelay()
+	buildDelay := time.Duration(settings.BuildDelay) * time.Millisecond
 
 	started := false
 
@@ -42,8 +41,8 @@ func start() {
 			eventName := <-startChannel
 
 			mainLog("receiving first event %s", eventName)
-			mainLog("sleeping for %d milliseconds", buildDelay)
-			time.Sleep(buildDelay * time.Millisecond)
+			mainLog("sleeping for %d milliseconds", buildDelay/time.Millisecond)
+			time.Sleep(buildDelay)
 			mainLog("flushing events")
 
 			flushEvents()
@@ -87,27 +86,15 @@ func initLogFuncs() {
 	appLog = newLogFunc("app")
 }
 
-func setEnvVars() {
-	os.Setenv("DEV_RUNNER", "1")
-	wd, err := os.Getwd()
-	if err == nil {
-		os.Setenv("RUNNER_WD", wd)
-	}
-
-	for k, v := range settings {
-		key := strings.ToUpper(fmt.Sprintf("%s%s", envSettingsPrefix, k))
-		os.Setenv(key, v)
-	}
-}
-
-// Watches for file changes in the root directory.
+// Start watches for file changes in the root directory.
 // After each file system event it builds and (re)starts the application.
-func Start() {
+func Start(confFile string) {
+	os.Setenv("DEV_RUNNER", "1")
 	initLimit()
-	initSettings()
+	initSettings(confFile)
 	initLogFuncs()
 	initFolders()
-	setEnvVars()
+	//setEnvVars()
 	watch()
 	start()
 	startChannel <- "/"

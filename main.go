@@ -14,29 +14,12 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"os"
 
 	"github.com/c2h5oh/fresh/runner"
 )
 
 func main() {
 	configPath := flag.String("c", "", "config file path")
-	watchPath := flag.String("w", "", "path to watch files")
-
 	flag.Parse()
-
-	// TODO: nice big refactoring of the flags + config
-
-	if *configPath != "" {
-		if _, err := os.Stat(*configPath); err != nil {
-			fmt.Printf("Can't find config file `%s`\n", *configPath)
-			os.Exit(1)
-		} else {
-			os.Setenv("RUNNER_CONFIG_PATH", *configPath)
-		}
-	}
-	os.Setenv("RUNNER_WATCH_PATH", *watchPath)
-
-	runner.Start()
+	runner.Start(*configPath)
 }
