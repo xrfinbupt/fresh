@@ -1,6 +1,6 @@
-# Status of this fork
+# Why did I create this fork
 
-Development by the original Fresh creator seems to have slowed down a lot with important pull requests waiting for many months to be reviewed and merged.
+Development by the original Fresh creator seems to have slowed down a lot with important pull requests waiting for many months to be reviewed and merged, while we're waiting for Fresh2 to be released.
 
 I will be cherry-picking commits from all the forks just to have a better, more up to date version. ~~Unless I stumble upon something affecting me personally I don't intend to put significant amount of time into improving this already great tool.~~ On day one I rewrote config handling, added multiple directory watching and excluding directories from being watched
 
@@ -15,8 +15,6 @@ Fresh is a command line tool that builds and (re)starts your web application eve
 If the web framework you are using supports the Fresh runner, it will show build errors on your browser.
 
 It has been tested with:
-* [chi](https://github.com/pressly/chi)
-* [goji](https://github.com/zenazn/goji)
 * [gocraft/web](https://github.com/gocraft/web)
 * [Martini](https://github.com/codegangsta/martini)
 * [Traffic](https://github.com/pilu/traffic)
