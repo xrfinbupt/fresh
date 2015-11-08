@@ -63,9 +63,9 @@ Here is a sample config file with the default settings:
 
     fresh -b "--race -tags 'tag1'"
 
-`fresh` accepts custom run arguments that are passed to built binary when starting it. To add them use `-a`:
+`fresh` accepts custom run arguments that are passed to built binary when starting it. To add them use `-r`:
 
-    fresh -a "-configFile ../config/testing.conf"
+    fresh -r "-configFile ../config/testing.conf"
 
 
 ## Original Author
