@@ -18,7 +18,8 @@ func initFolders() {
 func isExcluded(path string) bool {
 	absPath, _ := filepath.Abs(path)
 	for _, excl := range settings.ExcludePaths {
-		if strings.HasPrefix(absPath, excl) {
+		absExclPath, _ := filepath.Abs(excl)
+		if strings.HasPrefix(absPath, absExclPath+"/") {
 			return true
 		}
 	}

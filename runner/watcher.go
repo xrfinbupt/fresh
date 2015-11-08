@@ -38,6 +38,7 @@ func watchFolder(path string) {
 
 func watch() {
 	for _, p := range settings.WatchPaths {
+		p, _ = filepath.Abs(p)
 		filepath.Walk(p, func(path string, info os.FileInfo, err error) error {
 			if info.IsDir() {
 				if isExcluded(path) {
