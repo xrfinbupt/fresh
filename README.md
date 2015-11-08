@@ -1,4 +1,4 @@
-# Why did I create this fork
+# Why did I create this fork [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) [![Join the chat at https://gitter.im/pilu/fresh](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pilu/fresh?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Development by the original Fresh creator seems to have slowed down a lot with important pull requests waiting for many months to be reviewed and merged, while we're waiting for Fresh2 to be released.
 
@@ -6,9 +6,7 @@ I will be cherry-picking commits from all the forks just to have a better, more 
 
 I promise to be very responsive reviewing and accepting (or rejecting) pull requests.
 
-# Fresh
-
-[![Join the chat at https://gitter.im/pilu/fresh](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pilu/fresh?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Fresh
 
 Fresh is a command line tool that builds and (re)starts your web application every time you save a Go or template file.
 
