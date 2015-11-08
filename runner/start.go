@@ -41,7 +41,7 @@ func start() {
 			eventName := <-startChannel
 
 			mainLog("receiving first event %s", eventName)
-			mainLog("sleeping for %d milliseconds", buildDelay)
+			mainLog("sleeping for %d milliseconds", buildDelay/time.Millisecond)
 			time.Sleep(buildDelay)
 			mainLog("flushing events")
 
@@ -86,23 +86,10 @@ func initLogFuncs() {
 	appLog = newLogFunc("app")
 }
 
-/*
-func setEnvVars() {
-	os.Setenv("DEV_RUNNER", "1")
-	wd, err := os.Getwd()
-	if err == nil {
-		os.Setenv("RUNNER_WD", wd)
-	}
-
-	for k, v := range settings {
-		key := strings.ToUpper(fmt.Sprintf("%s%s", envSettingsPrefix, k))
-		os.Setenv(key, v)
-	}
-}*/
-
 // Start watches for file changes in the root directory.
 // After each file system event it builds and (re)starts the application.
 func Start(confFile string) {
+	os.Setenv("DEV_RUNNER", "1")
 	initLimit()
 	initSettings(confFile)
 	initLogFuncs()
