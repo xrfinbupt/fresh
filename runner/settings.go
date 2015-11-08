@@ -16,6 +16,8 @@ type config struct {
 	ConfigPath      string   `toml:"config_path"`
 	TmpPath         string   `toml:"tmp_path"`
 	BuildName       string   `toml:"build_name"`
+	BuildArgs       string   `toml:"build_args"`
+	RunArgs         string   `toml:"run_args"`
 	BuildLog        string   `toml:"build_log"`
 	ValidExtensions []string `toml:"valid_ext"`
 	BuildDelay      int32    `toml:"build_delay"`
@@ -38,6 +40,8 @@ var (
 		ConfigPath:      "./runner.conf",
 		TmpPath:         "./tmp",
 		BuildName:       "runner-build",
+		BuildArgs:       "",
+		RunArgs:         "",
 		BuildLog:        "runner-build-errors.log",
 		ValidExtensions: []string{".go", ".tpl", ".tmpl", ".html"},
 		BuildDelay:      600,
@@ -76,8 +80,11 @@ var (
 	}
 )
 
-func initSettings(confFile string) {
+func initSettings(confFile, buildArgs, runArgs string) {
 	defer buildPaths()
+	settings.BuildArgs = buildArgs
+	settings.RunArgs = runArgs
+
 	if confFile != "" {
 		if _, err := os.Stat(confFile); os.IsNotExist(err) {
 			logger.Fatalf("Config file %s does not exist", confFile)

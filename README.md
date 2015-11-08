@@ -59,6 +59,15 @@ Here is a sample config file with the default settings:
     log_color_watcher = "magenta"
     log_color_app     = ""
 
+`fresh` accepts custom build flags that are passed to build command of the watched code. To add them use `-b`:
+
+    fresh -b "--race -tags 'tag1'"
+
+`fresh` accepts custom run arguments that are passed to built binary when starting it. To add them use `-a`:
+
+    fresh -a "-configFile ../config/testing.conf"
+
+
 ## Original Author
 
 * [Andrea Franz](http://gravityblast.com)

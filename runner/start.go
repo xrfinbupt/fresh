@@ -88,13 +88,12 @@ func initLogFuncs() {
 
 // Start watches for file changes in the root directory.
 // After each file system event it builds and (re)starts the application.
-func Start(confFile string) {
+func Start(confFile, buildArgs, runArgs string) {
 	os.Setenv("DEV_RUNNER", "1")
 	initLimit()
-	initSettings(confFile)
+	initSettings(confFile, buildArgs, runArgs)
 	initLogFuncs()
 	initFolders()
-	//setEnvVars()
 	watch()
 	start()
 	startChannel <- "/"

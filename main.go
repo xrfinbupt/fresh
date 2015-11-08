@@ -20,6 +20,8 @@ import (
 
 func main() {
 	configPath := flag.String("c", "", "config file path")
+	buildArgs := flag.String("b", "", "build command line arguments")
+	runArgs := flag.String("r", "", "run command line arguments")
 	flag.Parse()
-	runner.Start(*configPath)
+	runner.Start(*configPath, *buildArgs, *runArgs)
 }
