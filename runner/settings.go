@@ -1,6 +1,7 @@
 package runner
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -80,27 +81,37 @@ var (
 	}
 )
 
-func initSettings(confFile, buildArgs, runArgs string) {
+func initSettings(confFile, buildArgs, runArgs, buildPath *string, watchList, excludeList Multiflag) error {
 	defer buildPaths()
-	settings.BuildArgs = buildArgs
-	settings.RunArgs = runArgs
 
-	if confFile != "" {
-		if _, err := os.Stat(confFile); os.IsNotExist(err) {
-			logger.Fatalf("Config file %s does not exist", confFile)
-			return
+	if *confFile != "" {
+		if _, err := os.Stat(*confFile); os.IsNotExist(err) {
+			return fmt.Errorf("Config file %s does not exist", *confFile)
 		}
-		settings.ConfigPath = confFile
+		settings.ConfigPath = *confFile
+
+		if _, err := toml.DecodeFile(settings.ConfigPath, &settings); err != nil {
+			return fmt.Errorf("Reading config file failed: %v", err)
+		}
 	}
 
-	if _, err := os.Stat(confFile); os.IsNotExist(err) {
-		return
+	if *buildArgs != "" {
+		settings.BuildArgs = *buildArgs
+	}
+	if *runArgs != "" {
+		settings.RunArgs = *runArgs
+	}
+	if *buildPath != "" {
+		settings.Root = *buildPath
+	}
+	if len(watchList) > 0 {
+		settings.WatchPaths = watchList
+	}
+	if len(excludeList) > 0 {
+		settings.ExcludePaths = excludeList
 	}
 
-	if _, err := toml.DecodeFile(settings.ConfigPath, &settings); err != nil {
-		logger.Fatal("Reading config file failed:", err)
-		return
-	}
+	return nil
 }
 
 func logColor(logName string) string {
@@ -126,5 +137,6 @@ func buildPaths() {
 	settings.BuildErrorPath = filepath.Join(settings.TmpPath, settings.BuildLog)
 
 	settings.WatchPaths = append(settings.WatchPaths, settings.Root)
+
 	settings.ExcludePaths = append(settings.ExcludePaths, settings.TmpPath)
 }

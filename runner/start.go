@@ -88,10 +88,14 @@ func initLogFuncs() {
 
 // Start watches for file changes in the root directory.
 // After each file system event it builds and (re)starts the application.
-func Start(confFile, buildArgs, runArgs string) {
+func Start(confFile, buildArgs, runArgs, buildPath *string, watchList, excludeList Multiflag) {
 	os.Setenv("DEV_RUNNER", "1")
 	initLimit()
-	initSettings(confFile, buildArgs, runArgs)
+	err := initSettings(confFile, buildArgs, runArgs, buildPath, watchList, excludeList)
+	if err != nil {
+		logger.Fatalf("Failed to start: %v", err)
+		return
+	}
 	initLogFuncs()
 	initFolders()
 	watch()

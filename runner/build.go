@@ -9,8 +9,22 @@ import (
 
 func build() (string, bool) {
 	buildLog("Building...")
+	var args = []string{
+		"build",
+		"-i",
+		"-o",
+		settings.BinaryPath,
+	}
 
-	cmd := exec.Command("go", "build", "-o", settings.BinaryPath, settings.BuildArgs, settings.Root)
+	if settings.BuildArgs != "" {
+		args = append(args, settings.BuildArgs)
+	}
+
+	if settings.Root != "" {
+		args = append(args, settings.Root)
+	}
+
+	cmd := exec.Command("go", args...)
 
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
