@@ -106,10 +106,10 @@ func initSettings(confFile, buildArgs, runArgs, buildPath, outputBinary *string,
 		settings.OutputBinary = *outputBinary
 	}
 	if len(watchList) > 0 {
-		settings.WatchPaths = watchList
+		settings.WatchPaths = append(settings.WatchPaths, watchList...)
 	}
 	if len(excludeList) > 0 {
-		settings.ExcludePaths = excludeList
+		settings.ExcludePaths = append(settings.ExcludePaths, excludeList...)
 	}
 
 	return nil
