@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/c2h5oh/martini"
+	"github.com/go-martini/martini"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/c2h5oh/fresh/runner/runnerutils"
 	"github.com/codegangsta/martini"
+	"github.com/pressly/fresh/runner/runnerutils"
 )
 
 func runnerMiddleware(w http.ResponseWriter, r *http.Request) {

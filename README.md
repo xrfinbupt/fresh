@@ -19,7 +19,7 @@ It has been tested with:
 
 ## Installation
 
-    go get github.com/c2h5oh/fresh
+    go get github.com/pressly/fresh
 
 ## Usage
 
