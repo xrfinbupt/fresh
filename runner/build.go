@@ -11,7 +11,6 @@ func build() (string, bool) {
 	buildLog("Building...")
 	var args = []string{
 		"build",
-		"-i",
 		"-o",
 		settings.BinaryPath,
 	}
