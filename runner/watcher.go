@@ -8,7 +8,7 @@ import (
 	"github.com/howeyc/fsnotify"
 )
 
-func watchFolder(path string) {
+func watch() {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		fatal(err)
@@ -28,15 +28,6 @@ func watchFolder(path string) {
 		}
 	}()
 
-	watcherLog("Watching %s", path)
-	err = watcher.Watch(path)
-
-	if err != nil {
-		fatal(err)
-	}
-}
-
-func watch() {
 	for _, p := range settings.WatchPaths {
 		p, _ = filepath.Abs(p)
 		filepath.Walk(p, func(path string, info os.FileInfo, err error) error {
@@ -47,7 +38,8 @@ func watch() {
 				if len(path) > 1 && strings.HasPrefix(filepath.Base(path), ".") {
 					return filepath.SkipDir
 				}
-				watchFolder(path)
+				watcherLog("Watching %s", path)
+				watcher.Watch(path)
 			}
 			return err
 		})
