@@ -1,4 +1,4 @@
-# Why did I create this fork [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) [![Join the chat at https://gitter.im/pilu/fresh](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pilu/fresh?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Purpose of this fork [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) [![Join the chat at https://gitter.im/pilu/fresh](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pilu/fresh?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Development by the original Fresh creator seems to have slowed down a lot with important pull requests waiting for many months to be reviewed and merged, while we're waiting for Fresh2 to be released.
 
@@ -19,7 +19,7 @@ It has been tested with:
 
 ## Installation
 
-    go get github.com/pressly/fresh
+    go get -u github.com/pressly/fresh
 
 ## Usage
 
