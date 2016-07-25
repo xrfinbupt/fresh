@@ -16,7 +16,6 @@ type config struct {
 	ExcludePaths    []string `toml:"exclude_paths"`
 	ConfigPath      string   `toml:"config_path"`
 	TmpPath         string   `toml:"tmp_path"`
-	BuildName       string   `toml:"build_name"`
 	BuildArgs       string   `toml:"build_args"`
 	RunArgs         string   `toml:"run_args"`
 	BuildLog        string   `toml:"build_log"`
@@ -29,8 +28,8 @@ type config struct {
 	LogColorWatcher string   `toml:"log_color_watcher"`
 	LogColorApp     string   `toml:"log_color_app"`
 
-	BuildErrorPath string
-	BinaryPath     string
+	BuildErrorPath string `toml:"build_error_log"`
+	OutputBinary   string `toml:"output_binary"`
 }
 
 var (
@@ -40,7 +39,6 @@ var (
 		ExcludePaths:    []string{},
 		ConfigPath:      "./runner.conf",
 		TmpPath:         "./tmp",
-		BuildName:       "runner-build",
 		BuildArgs:       "",
 		RunArgs:         "",
 		BuildLog:        "runner-build-errors.log",
@@ -81,7 +79,7 @@ var (
 	}
 )
 
-func initSettings(confFile, buildArgs, runArgs, buildPath *string, watchList, excludeList Multiflag) error {
+func initSettings(confFile, buildArgs, runArgs, buildPath, outputBinary *string, watchList, excludeList Multiflag) error {
 	defer buildPaths()
 
 	if *confFile != "" {
@@ -103,6 +101,9 @@ func initSettings(confFile, buildArgs, runArgs, buildPath *string, watchList, ex
 	}
 	if *buildPath != "" {
 		settings.Root = *buildPath
+	}
+	if *outputBinary != "" {
+		settings.OutputBinary = *outputBinary
 	}
 	if len(watchList) > 0 {
 		settings.WatchPaths = watchList
@@ -130,13 +131,34 @@ func logColor(logName string) string {
 }
 
 func buildPaths() {
-	settings.BinaryPath = filepath.Join(settings.TmpPath, settings.BuildName)
-	if runtime.GOOS == "windows" && filepath.Ext(settings.BinaryPath) != ".exe" {
-		settings.BinaryPath += ".exe"
-	}
 	settings.BuildErrorPath = filepath.Join(settings.TmpPath, settings.BuildLog)
 
 	settings.WatchPaths = append(settings.WatchPaths, settings.Root)
 
 	settings.ExcludePaths = append(settings.ExcludePaths, settings.TmpPath)
+
+	d, f := filepath.Split(settings.OutputBinary)
+	// if filename is empty try to get it from root
+	if f == "" {
+		f = filepath.Base(settings.Root)
+	}
+	// if filename is "." (because output_binary or  root was "." ) use absolute path to get it
+	if f == "." {
+		var err error
+		if f, err = filepath.Abs(f); err != nil {
+			f = "runner-build"
+		}
+		f = filepath.Base(f)
+	}
+
+	// if binary location (dir) is empty stick it in tmp_path
+	if d == "" {
+		d = settings.TmpPath
+	}
+
+	settings.OutputBinary = filepath.Join(d, f)
+	if runtime.GOOS == "windows" && filepath.Ext(settings.OutputBinary) != ".exe" {
+		settings.OutputBinary += ".exe"
+	}
+
 }

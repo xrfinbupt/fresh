@@ -1,13 +1,11 @@
 package runner
 
-import (
-	"os/exec"
-)
+import "os/exec"
 
 func run() bool {
 	runnerLog("Running...")
 
-	cmd := exec.Command(settings.BinaryPath, settings.RunArgs)
+	cmd := exec.Command(settings.OutputBinary, settings.RunArgs)
 
 	cmd.Stdout = appLogWriter{}
 	cmd.Stderr = appLogWriter{}

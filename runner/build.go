@@ -12,7 +12,7 @@ func build() (string, bool) {
 	var args = []string{
 		"build",
 		"-o",
-		settings.BinaryPath,
+		settings.OutputBinary,
 	}
 
 	if settings.BuildArgs != "" {
