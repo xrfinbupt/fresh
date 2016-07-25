@@ -3,10 +3,40 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "hqDDDpue/5363luidNMBS8z8eJU=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "99064174e013895bbd9b025c31100bd1d9b590ca",
+			"revisionTime": "2016-07-17T15:07:09Z"
+		},
+		{
 			"checksumSHA1": "ZxzYc1JwJ3U6kZbw/KGuPko5lSY=",
 			"path": "github.com/howeyc/fsnotify",
 			"revision": "f0c08ee9c60704c1879025f2ae0ff3e000082c13",
 			"revisionTime": "2015-10-03T19:46:02Z"
+		},
+		{
+			"checksumSHA1": "6wAWOVRtaH7hX48hmw9o7noyy5Q=",
+			"path": "github.com/mattn/go-colorable",
+			"revision": "9056b7a9f2d1f2d96498d6d146acd1f9d5ed3d59",
+			"revisionTime": "2016-06-02T15:08:27Z"
+		},
+		{
+			"checksumSHA1": "NkbetqlpWBi3gP08JDneC+axTKw=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "56b76bdf51f7708750eac80fa38b952bb9f32639",
+			"revisionTime": "2015-12-11T00:06:21Z"
+		},
+		{
+			"checksumSHA1": "vYmpyxSvzbIzD1lUm/OVbysevGg=",
+			"path": "github.com/pilu/miniassert",
+			"revision": "bee63581261ac8863051693ece007db9a5cee181",
+			"revisionTime": "2014-05-22T12:58:40Z"
+		},
+		{
+			"checksumSHA1": "8fD/im5Kwvy3JgmxulDTambmE8w=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "a646d33e2ee3172a661fc09bca23bb4889a41bc8",
+			"revisionTime": "2016-07-15T05:43:45Z"
 		}
 	],
 	"rootPath": "github.com/pressly/fresh"
