@@ -31,11 +31,3 @@ func newLogFunc(prefix string) func(string, ...interface{}) {
 func fatal(err error) {
 	logger.Fatal(err)
 }
-
-type appLogWriter struct{}
-
-func (a appLogWriter) Write(p []byte) (n int, err error) {
-	appLog("%s", string(p))
-
-	return len(p), nil
-}
