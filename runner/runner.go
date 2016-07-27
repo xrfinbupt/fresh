@@ -3,6 +3,7 @@ package runner
 import (
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func run() bool {
@@ -16,6 +17,7 @@ func run() bool {
 	if err != nil {
 		fatal(err)
 	}
+	runnerLog(strings.Repeat("-", 20))
 
 	go func() {
 		<-stopChannel

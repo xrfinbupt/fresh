@@ -45,6 +45,7 @@ func build() (string, bool) {
 
 	err = cmd.Wait()
 	if err != nil {
+		buildLog("Failed: \n%s", errBuf)
 		return string(errBuf), false
 	}
 

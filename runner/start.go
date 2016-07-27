@@ -3,7 +3,6 @@ package runner
 import (
 	"os"
 	"runtime"
-	"strings"
 	"time"
 )
 
@@ -29,22 +28,19 @@ func flushEvents() {
 }
 
 func start() {
-	loopIndex := 0
 	buildDelay := time.Duration(settings.BuildDelay) * time.Millisecond
 
 	started := false
 
 	go func() {
 		for {
-			loopIndex++
-			mainLog("Waiting (loop %d)...", loopIndex)
 			eventName := <-startChannel
-
 			mainLog("receiving first event %s", eventName)
+
 			mainLog("sleeping for %d milliseconds", buildDelay/time.Millisecond)
 			time.Sleep(buildDelay)
-			mainLog("flushing events")
 
+			mainLog("flushing events")
 			flushEvents()
 
 			mainLog("Started! (%d Goroutines)", runtime.NumGoroutine())
@@ -55,20 +51,15 @@ func start() {
 
 			errorMessage, ok := build()
 			if !ok {
-				mainLog("Build Failed: \n %s", errorMessage)
-				if !started {
-					os.Exit(1)
-				}
 				createBuildErrorsLog(errorMessage)
 			} else {
 				if started {
 					stopChannel <- true
 				}
-				run()
+				if run() {
+					started = true
+				}
 			}
-
-			started = true
-			mainLog(strings.Repeat("-", 20))
 		}
 	}()
 }
