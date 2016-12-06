@@ -79,7 +79,7 @@ var (
 	}
 )
 
-func initSettings(confFile, buildArgs, runArgs, buildPath, outputBinary *string, watchList, excludeList Multiflag) error {
+func initSettings(confFile, buildArgs, runArgs, buildPath, outputBinary, tmpPath *string, watchList, excludeList Multiflag) error {
 	defer buildPaths()
 
 	if *confFile != "" {
@@ -104,6 +104,9 @@ func initSettings(confFile, buildArgs, runArgs, buildPath, outputBinary *string,
 	}
 	if *outputBinary != "" {
 		settings.OutputBinary = *outputBinary
+	}
+	if *tmpPath != "" {
+		settings.TmpPath = *tmpPath
 	}
 	if len(watchList) > 0 {
 		settings.WatchPaths = append(settings.WatchPaths, watchList...)

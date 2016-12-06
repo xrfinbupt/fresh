@@ -26,9 +26,10 @@ func main() {
 	runArgs := flag.String("r", "", "run command line arguments")
 	buildPath := flag.String("p", "", "root path - package that will be built & ran")
 	outputBinary := flag.String("o", "", "output (built) binary location")
+	tmpPath := flag.String("t", "", "tmp path")
 	flag.Var(&watchList, "w", "watch path (recursive), repeat multiple times to watch multiple paths")
 	flag.Var(&excludeList, "e", "exclude path (recursive), repeat multiple times to exclude multiple paths")
 	flag.Parse()
 
-	runner.Start(configPath, buildArgs, runArgs, buildPath, outputBinary, watchList, excludeList)
+	runner.Start(configPath, buildArgs, runArgs, buildPath, outputBinary, tmpPath, watchList, excludeList)
 }
