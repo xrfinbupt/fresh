@@ -9,7 +9,7 @@ import (
 func run() bool {
 	runnerLog("Running...")
 
-	cmd := exec.Command(settings.OutputBinary, settings.RunArgs)
+	cmd := exec.Command(settings.OutputBinary, settings.RunArgs...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
