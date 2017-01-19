@@ -16,7 +16,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/pressly/fresh/runner"
+	"github.com/gaford/fresh/runner"
 )
 
 type flagStringSlice []string

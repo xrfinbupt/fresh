@@ -82,15 +82,25 @@ var (
 func initSettings(confFile, buildArgs *string, runArgs []string, buildPath, outputBinary, tmpPath *string, watchList, excludeList Multiflag) error {
 	defer buildPaths()
 
+	confFileExists := true
 	if *confFile != "" {
 		if _, err := os.Stat(*confFile); os.IsNotExist(err) {
 			return fmt.Errorf("Config file %s does not exist", *confFile)
 		}
 		settings.ConfigPath = *confFile
+	} else {
+		if _, err := os.Stat(settings.ConfigPath); os.IsNotExist(err) {
+			confFileExists = false
+		}
+	}
 
+	if confFileExists {
 		if _, err := toml.DecodeFile(settings.ConfigPath, &settings); err != nil {
 			return fmt.Errorf("Reading config file failed: %v", err)
 		}
+		runnerLog("Loaded config file: %s", settings.ConfigPath)
+	} else {
+		runnerLog("Loaded default config")
 	}
 
 	if *buildArgs != "" {
