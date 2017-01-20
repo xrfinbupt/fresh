@@ -82,12 +82,12 @@ func initLogFuncs() {
 func Start(confFile, buildArgs *string, runArgs []string, buildPath, outputBinary, tmpPath *string, watchList, excludeList Multiflag) {
 	os.Setenv("DEV_RUNNER", "1")
 	initLimit()
+	initLogFuncs()
 	err := initSettings(confFile, buildArgs, runArgs, buildPath, outputBinary, tmpPath, watchList, excludeList)
 	if err != nil {
 		logger.Fatalf("Failed to start: %v", err)
 		return
 	}
-	initLogFuncs()
 	initFolders()
 	watch()
 	start()
