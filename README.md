@@ -6,6 +6,10 @@ I will be cherry-picking commits from all the forks just to have a better, more 
 
 I promise to be very responsive reviewing and accepting (or rejecting) pull requests.
 
+## Rerun, an alternative to Fresh
+
+Check out https://github.com/VojtechVitek/rerun
+
 # Fresh
 
 Fresh is a command line tool that builds and (re)starts your web application every time you save a Go or template file.
