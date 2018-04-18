@@ -50,6 +50,7 @@ Here is a sample config file with the default settings:
     tmp_path          = "./tmp"
     build_name        = "runner-build"
     build_log         = "runner-build-errors.log"
+    run_args          = []
     valid_ext         = [".go", ".tpl", ".tmpl", ".html"]
     build_delay       = 600
     colors            = 1

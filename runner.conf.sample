@@ -1,6 +1,7 @@
 root              = "."
 watch_paths       = []
 exclude_paths     = []
+run_args          = ["dev"]
 tmp_path          = "./tmp"
 output_binary     = ""
 build_log         = "runner-build-errors.log"

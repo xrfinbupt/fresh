@@ -106,7 +106,9 @@ func initSettings(confFile, buildArgs *string, runArgs []string, buildPath, outp
 	if *buildArgs != "" {
 		settings.BuildArgs = *buildArgs
 	}
-	settings.RunArgs = []string(runArgs)
+	if len(runArgs) > 0 {
+		settings.RunArgs = runArgs
+	}
 	if *buildPath != "" {
 		settings.Root = *buildPath
 	}
